@@ -41,9 +41,7 @@ class User(auth_models.AbstractBaseUser, models.Model):
     is_staff = models.BooleanField(default=False)
     is_superuser= models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
-    is_user = models.BooleanField(default=False)
-
-
+    is_user = models.BooleanField(default=False)  
     USERNAME_FIELD = 'phone'
 
 
