@@ -32,8 +32,8 @@ class UserManager(auth_models.BaseUserManager):
 
 class User(auth_models.AbstractBaseUser, models.Model):
     name = models.CharField(max_length=200)
-    email = models.EmailField(max_length=200,unique=True)
-    phone = models.CharField(max_length=15)
+    email = models.EmailField(max_length=200)
+    phone = models.CharField(max_length=15,unique=True)
     dob = models.CharField(max_length=20, null=True, blank=True)
     profile_pic = models.ImageField(upload_to='profile', default='', null=True, blank=True)
     # Mondatory things 

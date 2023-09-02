@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'accountmanager',
+    'categorymanager',
+    'productmanager',
+    'ordermanager'
 ]
 
 MIDDLEWARE = [
@@ -98,6 +102,9 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+AUTH_USER_MODEL = 'accountmanager.User' ## for user model authentication  ##end
 
 
 # Internationalization
