@@ -7,25 +7,25 @@ from django.contrib.auth import models as auth_models
 # BaseUserManager
 
 class UserManager(auth_models.BaseUserManager):
-    def create_user(self, email, password=None, **extra_fields):
+    def create_user(self, phone, password=None, **extra_fields):
 
         "Creates and saves a new user"
 
-        if not email:
+        if not phone:
             raise ValueError(('Users must have an email address'))
 
-        user = self.model(email=self.normalize_email(email), **extra_fields)
+        user = self.model(phone= phone, **extra_fields)
         if password:
             user.set_password(password)
         user.save(using=self._db)
 
         return user
 
-    def create_superuser(self, email, password):
+    def create_superuser(self, phone, password):
 
         "Creates and saves a new superuser"
 
-        user = self.create_user(email, password)
+        user = self.create_user(phone, password)
         user.is_staff = True
         user.is_superuser = True
         user.save(using=self._db)
@@ -43,8 +43,6 @@ class User(auth_models.AbstractBaseUser, models.Model):
     is_admin = models.BooleanField(default=False)
     is_user = models.BooleanField(default=False)  
     USERNAME_FIELD = 'phone'
-
-
     objects = UserManager()
         
     def has_perm(self, perm, obj=None):
