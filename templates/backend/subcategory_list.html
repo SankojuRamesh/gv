@@ -1,0 +1,126 @@
+
+{% extends "backend/admin_base.html" %}
+{% block content %}    <br>
+    <div class="content-header">
+        <h2 class="content-title"> &nbsp; &nbsp;{{title}}</h2>
+          <div>
+        <a href="#" class="btn btn-light rounded font-md">Export</a>
+        <a href="#" class="btn btn-light rounded font-md">Import</a>
+        <a href="javascript:void(0)" class="btn btn-primary btn-sm rounded" data-toggle="modal" data-target="#exampleModal" >Create new</a>
+    </div>
+    </div>
+    <div class="card mb-4">
+        <header class="card-header">
+        
+        </header>
+        <!-- card-header end// -->
+        <div class="card-body">
+            {%for subcategory in subcategories%}
+            <article class="itemlist">
+                <div class="row align-items-center">
+                    <div class="col col-check flex-grow-0">
+                        <div class="form-check">
+                           {{subcategory.id}}
+                        </div>
+                    </div>
+                   <div class="col col-check flex-grow-0">
+                        <div class="form-check">
+                          
+                        </div>
+                    </div>
+                 
+                    <div class="col-lg-2 col-sm-2 col-4 col-price"><span> &nbsp;{{subcategory.title}}</span></div>
+                    <div class="col-lg-2 col-sm-2 col-4 col-status">
+                        <span class="badge rounded-pill alert-success">Active</span>
+                    </div>
+
+                    <div class="col col-check flex-grow-0">
+                        <div class="form-check">
+                          
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-2 col-sm-2 col-4 col-action text-end">
+                        <a href="#" class="btn btn-sm font-sm rounded btn-brand"> <i class="material-icons md-edit"></i> Edit </a>
+                        <a href="#" class="btn btn-sm font-sm btn-light rounded"> <i class="material-icons md-delete_forever"></i> Delete </a>
+                    </div>
+                </div>
+                <!-- row .// -->
+            </article>
+
+            {%endfor%} 
+         
+        </div>
+
+
+        <!------------------------->
+
+
+        <!-- card-body end// -->
+    </div>
+   
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>  <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Category Name:</label>
+                   <select id="catetory" class="form-control" >
+                    <option>Select</option>
+                    {%for cat in  categories%}
+                    <option value="{{cat.id}}">{{cat.title }}</option>
+                    {%endfor%}
+                
+                </select>
+                </div>
+               
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">SubCategory Name:</label>
+                  <input type="text" class="form-control" id="subcat-name" value="">
+                </div>
+               
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" id="subcatsave" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>{% csrf_token %}
+    {% endblock %}
+
+    {% block script %}
+
+    <script>
+
+        $(document).ready(function(){
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            
+            let cat = $("#subcatsave")
+            cat.click(function(){
+                let cattiele = $("#subcat-name").val()
+                let catid = $("#catetory").val()
+                alert(catid)
+                data= {"title":cattiele,"category":catid,   "csrfmiddlewaretoken": csrftoken }
+                if(cattiele){
+                    $.post('/admin/subcategory/', data,function(res){
+                        window.location.reload()
+                    })
+                    
+                }
+             })
+        })
+    </script>
+   
+    {% endblock %}
+
+
+
+ 
