@@ -369,7 +369,7 @@
                                     
                                      {%for category in categories%}
                                     <li>
-                                        <a class="active" href="index.html">{{category.title}} <i class="fi-rs-angle-down"></i></a>
+                                        <a class="active" href="javascript:void(0)">{{category.title}} <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
                                            {%for sub in category.sucat_list%}
                                             <li><a href="/products/?sub={{sub.id}}"> {{sub.title}}</a></li>
