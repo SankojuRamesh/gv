@@ -18,11 +18,13 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from productmanager import views as pviews
+from ordermanager import views as orderViews
+
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('admin/', include('adminmanager.urls')),
     path('',  pviews.home),
-
-
+    path('products/',  pviews.products),
+    path('wishlist/',  orderViews.WishList_list),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

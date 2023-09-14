@@ -9,6 +9,13 @@ class CategoryModel(models.Model):
     status = models.BooleanField(default=1, null=True, blank=True)
 
 
+    @property
+    def sucat_list(self):
+         
+        return self.category.all()
+    
+
+     
 
 class SubCategoryModel(models.Model):
     title = models.CharField(max_length=200)
