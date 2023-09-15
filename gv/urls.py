@@ -22,9 +22,13 @@ from ordermanager import views as orderViews
 
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+    path('superadmin/', admin.site.urls),
     path('admin/', include('adminmanager.urls')),
     path('',  pviews.home),
     path('products/',  pviews.products),
+    path('product/',  pviews.product_detail),
     path('wishlist/',  orderViews.WishList_list),
+    path('cart/',  orderViews.Cart),
+    path('addtocart/',  orderViews.AddtoCart),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

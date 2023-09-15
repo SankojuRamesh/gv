@@ -271,6 +271,11 @@
             <!--End Deals-->
         </div>
     </div>
+    
+    {% csrf_token %} 
+        <!-- Other form fields -->
+       
+      
 </div>
 
 {%endblock%}
@@ -282,7 +287,11 @@
    $(document).ready(function(){
 
      $("[id^=wishlist_]").click(function(){
-        alert(this.id)
+        pid = this.id.split("_")[1]
+        var csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+         $.post("/wishlist/", {'pid': pid, "csrfmiddlewaretoken":csrfToken}, function(responce){ 
+                $("#wishlist").text(responce)    
+        })
      })
    })
 </script>

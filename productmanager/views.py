@@ -3,6 +3,7 @@ from django.shortcuts import render, HttpResponse
 # Create your views here.
 from categorymanager.models import CategoryModel, SubCategoryModel
 from .models import ProductModel
+from ordermanager.models import WishlistModel, OrderModel
 
 
 
@@ -14,13 +15,20 @@ def home(request):
 
 def products(request):
     categories = CategoryModel.objects.all()
+    wishlist_count  = WishlistModel.objects.filter(user=request.user).count()
     subid = request.GET.get('sub')
     products= {}
     if subid:
-        products = ProductModel.objects.filter(subcategory=subid)
-    
+        products = ProductModel.objects.filter(subcategory=subid)  
+    return render(request, 'frontend/all_products.html', {"categories": categories, "products":products, "wishlist_count":wishlist_count})
 
-   
+def product_detail(request):
+    categories = CategoryModel.objects.all()
+    wishlist_count  = WishlistModel.objects.filter(user=request.user).count()
 
-    return render(request, 'frontend/all_products.html', {"categories": categories, "products":products})
+    pid = request.GET.get('id')
+    product = {}
+    if pid:
+        product = ProductModel.objects.get(id=pid)  
 
+    return render(request, 'frontend/productDetails.html', {"categories": categories,"product":product, "wishlist_count":wishlist_count})
