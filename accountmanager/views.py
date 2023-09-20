@@ -31,7 +31,7 @@ def register(request):
         username = request.POST.get("username")
         pwd = request.POST.get("password")
         user = User.objects.create_user(name=name,
-                                 phone= request.POST.get("username"),
+                                 phone= username,
                                  password=pwd)
         
     return render(request, 'frontend/register.html')
