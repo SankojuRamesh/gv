@@ -19,16 +19,27 @@ from django.conf import settings
 from django.conf.urls.static import static
 from productmanager import views as pviews
 from ordermanager import views as orderViews
+from accountmanager import views as accountViews
 
 
 urlpatterns = [
     path('superadmin/', admin.site.urls),
+     path('logout/', accountViews.logoutview),
+      path('userloginlogin/', accountViews.userloginlogin),
+    path('account/', accountViews.account), 
+    path('register/', accountViews.register),
     path('admin/', include('adminmanager.urls')),
+    
     path('',  pviews.home),
     path('products/',  pviews.products),
     path('product/',  pviews.product_detail),
     path('wishlist/',  orderViews.WishList_list),
+    path('Wishlistcount/',  orderViews.WishlistCount),
+    path('delWishlist/',  orderViews.delWishlist),
     path('cart/',  orderViews.Cart),
-    path('addtocart/',  orderViews.AddtoCart),
+    path('addtocart/',  orderViews.AddtoCart), 
+    path('updatecart/',  orderViews.updateCart),
+    path('deletecart/',  orderViews.DeleteCart),
+    path('checkout/',  orderViews.checkout),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

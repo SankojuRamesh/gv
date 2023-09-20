@@ -592,9 +592,10 @@
     {% block script %}
 <script>
      $(document).ready(function(){ 
-        var csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
-        $("[id^=cart_]").click(function(){
-
+        function addtocart(){
+         var csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+        $("body").delegate("[id^=cart_]", 'click',function(){
+          
             pid = this.id.split("_")[1]
             quantity = $("#quantity").val()
 
@@ -602,6 +603,9 @@
                 CartList()
             })
         })
+    }
+
+    addtocart()
      })
 </script>
    

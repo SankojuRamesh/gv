@@ -94,7 +94,7 @@
                                     <span class="old-price">$32.8</span>
                                 </div>
                                 <div class="add-cart">
-                                    <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                    <a class="add" href="javascript:void(0)" id="cart_{{product.id}}"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                 </div>
                             </div>
                         </div>
@@ -286,6 +286,21 @@
 
    $(document).ready(function(){
 
+    function addtocart(){
+         var csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+        $("body").delegate("[id^=cart_]", 'click',function(){
+          
+            pid = this.id.split("_")[1]
+            quantity =1
+
+            $.post("/addtocart/", {"pid":pid, "quantity": quantity , "csrfmiddlewaretoken":csrfToken},function(responce){
+                CartList()
+            })
+        })
+    }
+
+    addtocart()
+
      $("[id^=wishlist_]").click(function(){
         pid = this.id.split("_")[1]
         var csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
@@ -293,6 +308,8 @@
                 $("#wishlist").text(responce)    
         })
      })
+
+     
    })
 </script>
 

@@ -17,7 +17,7 @@ def products(request):
     categories = CategoryModel.objects.all()
     wishlist_count  = WishlistModel.objects.filter(user=request.user).count()
     subid = request.GET.get('sub')
-    products= {}
+    products = ProductModel.objects.all() 
     if subid:
         products = ProductModel.objects.filter(subcategory=subid)  
     return render(request, 'frontend/all_products.html', {"categories": categories, "products":products, "wishlist_count":wishlist_count})
@@ -32,3 +32,6 @@ def product_detail(request):
         product = ProductModel.objects.get(id=pid)  
 
     return render(request, 'frontend/productDetails.html', {"categories": categories,"product":product, "wishlist_count":wishlist_count})
+
+
+

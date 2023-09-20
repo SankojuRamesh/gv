@@ -21,11 +21,12 @@ class UserManager(auth_models.BaseUserManager):
 
         return user
 
-    def create_superuser(self, phone, password):
+    def create_superuser(self, phone, password, name):
 
         "Creates and saves a new superuser"
 
         user = self.create_user(phone, password)
+        user.name = name
         user.is_staff = True
         user.is_superuser = True
         user.save(using=self._db)
@@ -44,6 +45,7 @@ class User(auth_models.AbstractBaseUser, models.Model):
     is_user = models.BooleanField(default=False)  
     USERNAME_FIELD = 'phone'
     objects = UserManager()
+    REQUIRED_FIELDS = ['name']
         
     def has_perm(self, perm, obj=None):
         return self.is_admin
