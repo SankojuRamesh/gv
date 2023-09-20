@@ -7,6 +7,9 @@ from django.contrib.auth import models as auth_models
 # BaseUserManager
 
 class UserManager(auth_models.BaseUserManager):
+  
+         
+
     def create_user(self, phone, password=None, **extra_fields):
 
         "Creates and saves a new user"
@@ -30,6 +33,23 @@ class UserManager(auth_models.BaseUserManager):
         user.is_staff = True
         user.is_superuser = True
         user.save(using=self._db)
+
+
+    def create_end_user(self, phone, password, name):
+
+        "Creates and saves a new user"
+
+        user = self.create_user(phone, password)
+        user.name = name.capitalize()
+        user.is_staff = True
+        user.is_user = True
+        user.is_superuser = False
+        user.save(using=self._db)
+
+
+
+
+
 
 class User(auth_models.AbstractBaseUser, models.Model):
     name = models.CharField(max_length=200)

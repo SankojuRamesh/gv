@@ -3,6 +3,11 @@ from django.shortcuts import render, HttpResponse
 from categorymanager.models import CategoryModel, SubCategoryModel
 from .models import WishlistModel, ProductModel, CartModel
 
+from django.shortcuts import render, redirect
+from django.conf import settings
+import razorpay
+
+
 # Create your views here. 
 
 def WishList_list(request):
@@ -102,3 +107,6 @@ def checkout(request):
         for cartAmount in cartlist:
                 total = float(cartAmount.total_price)+float(total)
     return render(request, 'frontend/checkout.html', {"categories": categories, "cartlist":cartlist,"total":total,  "wishlist_count":wishlist_count})
+
+
+

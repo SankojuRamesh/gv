@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth import logout, authenticate, login
 from django.shortcuts import redirect
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 def logoutview(request):
     logout(request)
@@ -30,8 +31,9 @@ def register(request):
         name = request.POST.get("name")
         username = request.POST.get("username")
         pwd = request.POST.get("password")
-        user = User.objects.create_user(name=name,
+        user = User.objects.create_end_user(name=name,
                                  phone= username,
                                  password=pwd)
+        return redirect("/")
         
     return render(request, 'frontend/register.html')

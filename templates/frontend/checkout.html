@@ -142,6 +142,8 @@
                     </div>
                     <div class="divider-2 mb-30"></div>
                     <div class="table-responsive order_table checkout">
+                        <form action="{% url 'payment' %}" method='POST'>
+                            {% csrf_token %}
                         <table class="table no-border">
                             <tbody>
                                  {%for cart in cartlist%}
@@ -165,12 +167,18 @@
                                     </td>
                                 </tr>
                                  {%endfor%}
+                                 <input type="name" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="Ramesh">
+                                 <input type="hidden" name="amount" class="form-control" id="exampleInputPassword1" value="{{total}}">
                                  <tr><td colspan="3"><h4><center>Total</center></h4></td><td><center> <a href="Javacript:void(0)" class="text-heading"><h4>{{total}}</h4></a></center></td></tr>
                             </tbody>
                         </table>
+                        <button type="submit" class="btn btn-primary">Pay Now</button>
+ </form>
+
+ 
                     </div>
                 </div>
-                <div class="payment ml-30">
+                <!-- <div class="payment ml-30">
                     <h4 class="mb-30">Payment</h4>
                     <div class="payment_option">
                         <div class="custome-radio">
@@ -193,7 +201,7 @@
                         <img src="assets/imgs/theme/icons/payment-zapper.svg" alt="">
                     </div>
                     <a href="#" class="btn btn-fill-out btn-block mt-30">Place an Order<i class="fi-rs-sign-out ml-15"></i></a>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
