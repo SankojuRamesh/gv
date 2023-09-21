@@ -2,6 +2,8 @@ from django.shortcuts import render, HttpResponse
 from django.contrib.auth.decorators import login_required
 from productmanager.models import ProductModel
 from categorymanager.models import CategoryModel, SubCategoryModel
+from adminmanager.models import BanerModel
+from django.shortcuts import redirect
 from django.forms import ModelForm
 # Create your views here. 
 
@@ -86,4 +88,28 @@ def homesettings(request):
 
 
 def baner(request):
-     return render(request, 'backend/banerimages.html', {"title": "Home Settings"})
+     
+    if request.method == "POST":        
+        data = {
+                 "title":request.POST.get('banername'), 
+                'iamge': request.FILES['banerimage'], 
+                
+            } 
+         
+        BanerModel.objects.create(**data)
+        
+        return  redirect('/admin/homesettings/')
+        
+    
+    baners = BanerModel.objects.all()
+    return render(request, 'backend/banerimages.html', {"title": "Home Settings", "baners":baners})
+
+
+def banerupdate(request):
+    banerid = request.GET.get("banerid")
+    status = request.GET.get("status")
+    if banerid:
+        BanerObj = BanerModel.objects.get(id=banerid)
+        BanerObj.status = status
+        BanerObj.save()
+        return HttpResponse('updated')

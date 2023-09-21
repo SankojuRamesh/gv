@@ -18,5 +18,6 @@ urlpatterns = [
     path('settings/',views.settings),
     path('homesettings/',views.homesettings),
      path('baner/',views.baner),
+      path('banerupdate/',views.banerupdate),
  path('newproduct/',views.newproduct),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

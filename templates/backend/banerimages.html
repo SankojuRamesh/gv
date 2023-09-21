@@ -14,16 +14,23 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {%for baner in baners %}
                     <tr>
-                        <td>#1357</td>
-                        <td>March 45, 2020</td>
-                        <td>Active</td>
+                        <td><img src="/products/{{baner.iamge}}" style="width: 100px;"></td>
+                        <td>{{baner.title }}</td>
+                        <td>  {% if baner.status  %}
+                            Aactive
+                            {% else %}
+                            Inactive
+                          {% endif %} </td>
                         
                         <td> <div class="form-check ms-2">
-                            <input class="form-check-input" type="checkbox" value="">
+                            <input class="form-check-input" id="baner_{{baner.id}}" type="checkbox"      {% if baner.status  %}
+                            checked
+                          {% endif %} value="">
                         </div> </td>
                     </tr>
-                 
+                 {%endfor%}
                      
                 </tbody>
             </table>
