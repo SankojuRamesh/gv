@@ -4,13 +4,15 @@ from django.shortcuts import render, HttpResponse
 from categorymanager.models import CategoryModel, SubCategoryModel
 from .models import ProductModel
 from ordermanager.models import WishlistModel, OrderModel
+from adminmanager.models import BanerModel
 
 
 
 def home(request):
     categories = CategoryModel.objects.all()
+    banerimaes = BanerModel.objects.filter(status=1)
 
-    return render(request, 'frontend/home.html', {"categories": categories})
+    return render(request, 'frontend/home.html', {"categories": categories, "banerimages":banerimaes})
 
 
 def products(request):
