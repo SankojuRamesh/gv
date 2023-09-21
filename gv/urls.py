@@ -26,7 +26,7 @@ from accountmanager import views as accountViews
 urlpatterns = [
     path('superadmin/', admin.site.urls),
      path('logout/', accountViews.logoutview),
-      path('userloginlogin/', accountViews.userloginlogin),
+      path('userlogin/', accountViews.userloginview),
     path('account/', accountViews.account), 
     path('register/', accountViews.register),
     path('admin/', include('adminmanager.urls')),

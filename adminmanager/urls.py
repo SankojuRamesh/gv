@@ -15,5 +15,8 @@ urlpatterns = [
         path('subcategory/',views.subcategory), 
         path('subcategoryById/',views.subcategoryById),
     path('products/',views.products),
+    path('settings/',views.settings),
+    path('homesettings/',views.homesettings),
+     path('baner/',views.baner),
  path('newproduct/',views.newproduct),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

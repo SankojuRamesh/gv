@@ -62,7 +62,10 @@ class CartModel(models.Model):
     total_price = models.DecimalField(max_digits=6, decimal_places=2)
     user  =  models.ForeignKey(User, on_delete=models.CASCADE)
 
-
+    @property
+    def subtotal(self):
+        print(float(self.quantity) * float(self.productid.price))
+        return float(self.quantity) * float(self.productid.price)
 
 class WishlistModel(models.Model):
     productid = models.ForeignKey(ProductModel, on_delete=models.CASCADE)

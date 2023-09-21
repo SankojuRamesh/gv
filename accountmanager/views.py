@@ -8,7 +8,7 @@ def logoutview(request):
     logout(request)
     return redirect('/')
  
-def userloginlogin(request):
+def userloginview(request):
     if request.method == "POST":
         username = request.POST.get("username")
         pwd = request.POST.get("password")
@@ -34,6 +34,6 @@ def register(request):
         user = User.objects.create_end_user(name=name,
                                  phone= username,
                                  password=pwd)
-        return redirect("/")
+        return redirect("/userlogin/")
         
     return render(request, 'frontend/register.html')

@@ -3,11 +3,11 @@
     {%for cart_product in cart%}
     <li id="tr_{{cart_product.id}}">
         <div class="shopping-cart-img">
-            <a href="shop-product-right.html"><img alt="Nest" src="/static/frontend/assets/imgs/shop/thumbnail-3.jpg"></a>
+            <a href="/products/?sub={{cart_product.productid.subcategory.id}}"><img alt="Nest" src="/products/{{cart_product.productid.coverImage}}"></a>
         </div>
         <div class="shopping-cart-title">
-            <h4><a href="shop-product-right.html">{{cart_product.productid.title}}</a></h4>
-            <h4><span>{{cart_product.quantity}} × </span>{{cart_product.productid.price}}</h4>
+            <h4><a href="/products/?sub={{cart_product.productid.subcategory.id}}">{{cart_product.productid.title}}</a></h4>
+            <h4><span>{{cart_product.quantity}} × </span>{{cart_product.productid.price}}  = &nbsp; {{cart_product.subtotal}} </h4>
         </div>
         <div class="shopping-cart-delete">
             <a href="javascript:void(0)"  id="delCart_{{cart_product.id}}"> <i class="fi-rs-cross-small"></i></a>

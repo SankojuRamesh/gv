@@ -15,7 +15,11 @@ def home(request):
 
 def products(request):
     categories = CategoryModel.objects.all()
-    wishlist_count  = WishlistModel.objects.filter(user=request.user).count()
+    wishlist_count= 0
+    try:
+        wishlist_count  = WishlistModel.objects.filter(user=request.user).count()
+    except:
+        wishlist_count=0
     subid = request.GET.get('sub')
     products = ProductModel.objects.all() 
     if subid:

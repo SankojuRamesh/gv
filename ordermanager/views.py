@@ -10,7 +10,10 @@ import razorpay
 
 # Create your views here. 
 
+
 def WishList_list(request):
+    if not request.user.is_authenticated:
+        return redirect('/userlogin/')
     
     if request.method == "POST":
         productid  = ProductModel.objects.get(id=request.POST.get('pid'))
@@ -27,6 +30,8 @@ def WishList_list(request):
         wishlist = WishlistModel.objects.filter(user= request.user)
         return render(request,'frontend/wishlist.html', {"categories": categories, "wishlist":wishlist})
 
+
+
 def WishlistCount(request):
     wishlist = WishlistModel.objects.filter(user= request.user).count()
     return HttpResponse(wishlist)
@@ -38,17 +43,26 @@ def delWishlist(request):
 
  
 def Cart(request):  
+    if request.GET.get("detail")  :
+        cartlist = CartModel.objects.filter(user= request.user)
+        total= 0
+        if cartlist:
+            for cartAmount in cartlist:
+                total = float(cartAmount.total_price)+float(total) 
+        if not request.user.is_authenticated:
+            return redirect('/userlogin/')  
+        return render(request,'frontend/cart_detail.html', {"cart": cartlist,"total": total ,"crtcount":cartlist.count()})
+
     cartlist = CartModel.objects.filter(user= request.user)
     total= 0
     if cartlist:
         for cartAmount in cartlist:
                 total = float(cartAmount.total_price)+float(total)
-    if request.GET.get("detail")  : 
-        return render(request,'frontend/cart_detail.html', {"cart": cartlist,"total": total ,"crtcount":cartlist.count()})
-
     return render(request,'frontend/cartlist.html', {"cart": cartlist,"total": total , "crtcount":cartlist.count()})
 
-def AddtoCart(request):  
+def AddtoCart(request):
+    if not request.user.is_authenticated:
+        return redirect('/userlogin/')   
     cartlist = CartModel.objects.filter(user= request.user) 
     if request.method == "POST":
         product = ProductModel.objects.get(id=request.POST.get('pid'))

@@ -67,3 +67,23 @@ def newproduct(request):
     list_categories = CategoryModel.objects.all()
     all_products = ProductModel.objects.all()
     return render(request, 'backend/newproduct.html', {"title": "Product List", "products":all_products, "list_categories":list_categories})
+
+
+def settings(request):
+    list_categories = CategoryModel.objects.all()
+    all_products = ProductModel.objects.all()
+    return render(request, 'backend/settings.html', {"title": "Settings"})
+
+
+
+def homesettings(request):
+     
+    return render(request, 'backend/homesettings.html', {"title": "Home Settings"})
+    
+
+
+
+
+
+def baner(request):
+     return render(request, 'backend/banerimages.html', {"title": "Home Settings"})
