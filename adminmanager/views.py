@@ -113,3 +113,7 @@ def banerupdate(request):
         BanerObj.status = status
         BanerObj.save()
         return HttpResponse('updated')
+def banerdelete(request):
+    banerid = request.GET.get("banerid")
+    BanerObj = BanerModel.objects.get(id=banerid).delete()
+    return HttpResponse('deleted')

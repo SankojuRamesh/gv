@@ -10,12 +10,12 @@
                 <div class="row gx-5">
                     <aside class="col-lg-3 border-end">
                         <nav class="nav nav-pills flex-lg-column mb-4">
+                          <a class="nav-link" href="javascript:void(0)">General</a>
                             <a class="nav-link active" id="settings_baner" aria-current="page" href="javascript:vpid(0)">Baner Images</a>
-                            <a class="nav-link"  id="settings_baner" href="#">Moderators</a>
-                            <a class="nav-link" href="#">Admin account</a>
-                            <a class="nav-link" href="#">SEO settings</a>
-                            <a class="nav-link" href="#">Mail settings</a>
-                            <a class="nav-link" href="#">Newsletter</a>
+                            <a class="nav-link"  id="settings_baner" href="#">Best Sells</a>
+                            <a class="nav-link" href="#">SMS Setings</a>
+                            
+                            
                         </nav>
                     </aside>
                     <div class="col-lg-9">
@@ -75,12 +75,10 @@
 
     $(document).ready(function(){
         function baner(){
-            $.get('/admin/baner/', function(responce){
-               
+            $.get('/admin/baner/', function(responce){               
                 $("#relatedPage").html(responce) 
                 baneractivate()
-            })
-          
+            }) 
         }
 
     
@@ -89,6 +87,14 @@
         baner()
 
    function baneractivate(){
+          $("[id^=banerdel_]").click(function(){
+            banerid = this.id.split("_")[1]
+
+            $.get("/admin/banerdelete/?banerid="+banerid+"&status="+status, function(responce){
+                baner()
+
+             })
+          })
            $("[id^=baner_]").click(function(){
              banerid = this.id.split("_")[1]
              status = 0
@@ -105,6 +111,11 @@
            })
     }
     })
+ 
+ 
+
+ 
+</script>
 </script>
 
 {% endblock %}
