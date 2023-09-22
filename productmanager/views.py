@@ -4,18 +4,21 @@ from django.shortcuts import render, HttpResponse
 from categorymanager.models import CategoryModel, SubCategoryModel
 from .models import ProductModel
 from ordermanager.models import WishlistModel, OrderModel
-from adminmanager.models import BanerModel
+from adminmanager.models import BanerModel, SettingsModel
+ 
 
 
 
 def home(request):
+    settingsdata = SettingsModel.objects.all().first()
     categories = CategoryModel.objects.all()
     banerimaes = BanerModel.objects.filter(status=1)
 
-    return render(request, 'frontend/home.html', {"categories": categories, "banerimages":banerimaes})
+    return render(request, 'frontend/home.html', {"categories": categories, "banerimages":banerimaes, "settingsdata":settingsdata})
 
 
 def products(request):
+    settingsdata = SettingsModel.objects.all().first()
     categories = CategoryModel.objects.all()
     wishlist_count= 0
     try:
@@ -26,18 +29,21 @@ def products(request):
     products = ProductModel.objects.all() 
     if subid:
         products = ProductModel.objects.filter(subcategory=subid)  
-    return render(request, 'frontend/all_products.html', {"categories": categories, "products":products, "wishlist_count":wishlist_count})
+    return render(request, 'frontend/all_products.html', {"categories": categories, "products":products, "wishlist_count":wishlist_count, "settingsdata":settingsdata})
 
 def product_detail(request):
+    settingsdata = SettingsModel.objects.all().first()
     categories = CategoryModel.objects.all()
     wishlist_count  = WishlistModel.objects.filter(user=request.user).count()
 
     pid = request.GET.get('id')
     product = {}
     if pid:
-        product = ProductModel.objects.get(id=pid)  
+        product = ProductModel.objects.get(id=pid) 
 
-    return render(request, 'frontend/productDetails.html', {"categories": categories,"product":product, "wishlist_count":wishlist_count})
+    return render(request, 'frontend/productDetails.html', {"categories": categories,"product":product, "wishlist_count":wishlist_count, "settingsdata":settingsdata})
+
+
 
 
 

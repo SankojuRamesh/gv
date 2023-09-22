@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse
 # Create your views here.
 from categorymanager.models import CategoryModel, SubCategoryModel
 from .models import WishlistModel, ProductModel, CartModel
+from adminmanager.models import SettingsModel
 
 from django.shortcuts import render, redirect
 from django.conf import settings
@@ -25,10 +26,11 @@ def WishList_list(request):
              
         return HttpResponse(WishlistModel.objects.filter(user= request.user).count())
 
-    else:     
+    else:
+        settingsdata = SettingsModel.objects.all().first()     
         categories = CategoryModel.objects.all()
         wishlist = WishlistModel.objects.filter(user= request.user)
-        return render(request,'frontend/wishlist.html', {"categories": categories, "wishlist":wishlist})
+        return render(request,'frontend/wishlist.html', {"categories": categories, "wishlist":wishlist, "settingsdata":settingsdata})
 
 
 
@@ -42,7 +44,8 @@ def delWishlist(request):
     return HttpResponse(wishlist)
 
  
-def Cart(request):  
+def Cart(request):
+    settingsdata = SettingsModel.objects.all().first() 
     if request.GET.get("detail")  :
         cartlist = CartModel.objects.filter(user= request.user)
         total= 0
@@ -51,14 +54,14 @@ def Cart(request):
                 total = float(cartAmount.total_price)+float(total) 
         if not request.user.is_authenticated:
             return redirect('/userlogin/')  
-        return render(request,'frontend/cart_detail.html', {"cart": cartlist,"total": total ,"crtcount":cartlist.count()})
+        return render(request,'frontend/cart_detail.html', {"cart": cartlist,"total": total ,"crtcount":cartlist.count(), "settingsdata":settingsdata})
 
     cartlist = CartModel.objects.filter(user= request.user)
     total= 0
     if cartlist:
         for cartAmount in cartlist:
                 total = float(cartAmount.total_price)+float(total)
-    return render(request,'frontend/cartlist.html', {"cart": cartlist,"total": total , "crtcount":cartlist.count()})
+    return render(request,'frontend/cartlist.html', {"cart": cartlist,"total": total , "crtcount":cartlist.count(), "settingsdata":settingsdata})
 
 def AddtoCart(request):
     if not request.user.is_authenticated:
@@ -113,6 +116,7 @@ def DeleteCart(request):
 
 
 def checkout(request):
+    settingsdata = SettingsModel.objects.all().first()
     categories = CategoryModel.objects.all()
     wishlist_count  = WishlistModel.objects.filter(user=request.user).count()
     cartlist = CartModel.objects.filter(user= request.user)
@@ -120,7 +124,7 @@ def checkout(request):
     if cartlist:
         for cartAmount in cartlist:
                 total = float(cartAmount.total_price)+float(total)
-    return render(request, 'frontend/checkout.html', {"categories": categories, "cartlist":cartlist,"total":total,  "wishlist_count":wishlist_count})
+    return render(request, 'frontend/checkout.html', {"categories": categories, "cartlist":cartlist,"total":total,  "wishlist_count":wishlist_count, "settingsdata":settingsdata})
 
 
 

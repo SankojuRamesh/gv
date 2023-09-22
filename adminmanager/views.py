@@ -2,9 +2,13 @@ from django.shortcuts import render, HttpResponse
 from django.contrib.auth.decorators import login_required
 from productmanager.models import ProductModel
 from categorymanager.models import CategoryModel, SubCategoryModel
-from adminmanager.models import BanerModel
+from adminmanager.models import BanerModel, SettingsModel
 from django.shortcuts import redirect
 from django.forms import ModelForm
+from django.http import JsonResponse
+from django.core import serializers
+from django.forms.models import model_to_dict
+import json
 # Create your views here. 
 
 # @login_required(login_url='/login/')
@@ -14,7 +18,7 @@ def dashboard(request):
     
 def category(request): 
     if request.method == "POST":  
-        print(request.POST.get('title'))
+         
         CategoryModel.objects.create(title= request.POST.get('title'), status=True)
 
     list_categories = CategoryModel.objects.all()
@@ -117,3 +121,41 @@ def banerdelete(request):
     banerid = request.GET.get("banerid")
     BanerObj = BanerModel.objects.get(id=banerid).delete()
     return HttpResponse('deleted')
+
+
+def general(request):
+    if request.method == "POST": 
+        data = {} 
+        if  request.POST.get('title'):
+            data['title'] = request.POST.get('title')
+        
+        if  request.POST.get('email'):
+            data['email'] = request.POST.get('email')
+        
+        if  request.POST.get('email'):
+            data['phone'] = request.POST.get('phone')
+        
+        if  request.POST.get('email'):
+            data['address'] = request.POST.get('address')
+        
+        if request.FILES.get('logo'):
+            
+            data['logo']= request.FILES['logo']
+            print( data['logo'])
+
+        
+
+        if data:
+            SettingsModel.objects.all().delete()
+            generalSettings = SettingsModel.objects.update_or_create(**data) 
+            
+            return redirect('/admin/homesettings/?tab=general')
+
+    generalSettings = SettingsModel.objects.all().first()
+    return render(request, 'backend/general.html', {"title": "Home Settings", "generalSettings":generalSettings})
+
+
+
+
+ 
+    
