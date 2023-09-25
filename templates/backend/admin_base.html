@@ -23,7 +23,7 @@
         <aside class="navbar-aside" id="offcanvas_aside">
             <div class="aside-top">
                 <a href="index.html" class="brand-wrap">
-                    <img src="{% static  'backend/assets/imgs/theme/logo.svg' %}" class="logo" alt="Nest Dashboard" />
+                    <img src="/products/{{settings.logo}}" class="logo" alt="Nest Dashboard" />
                 </a>
                 <div>
                     <button class="btn btn-icon btn-aside-minimize"><i class="text-muted material-icons md-menu_open"></i></button>
@@ -66,9 +66,9 @@
                             <span class="text">Orders</span>
                         </a>
                         <div class="submenu">
-                            <a href="#">Order list 1</a>
+                            <a href="/orders">Order </a>
                             
-                            <a href="#">Order detail</a>
+                            <!-- <a href="#">Order detail</a> -->
                         </div>
                     </li>
                     <li class="menu-item has-submenu">

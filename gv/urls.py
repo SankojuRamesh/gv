@@ -19,7 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from productmanager import views as pviews
 from ordermanager import views as orderViews
-from ordermanager import payment
+from ordermanager import payment, models as orderModels
 from accountmanager import views as accountViews
 
 
@@ -44,4 +44,7 @@ urlpatterns = [
     path('checkout/',  orderViews.checkout),
     path("payment/", payment.order_payment, name="payment"),
     path("callback/", payment.callback, name="callback"),
+    path("orderdetails/",orderViews.orderdetails , name="orderdetails"),
+
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -13,8 +13,12 @@ def home(request):
     settingsdata = SettingsModel.objects.all().first()
     categories = CategoryModel.objects.all()
     banerimaes = BanerModel.objects.filter(status=1)
+    pproducts = ProductModel.objects.all()[:16]
+    best_sells = ProductModel.objects.filter(sell_state= 'BEST')
+    print(best_sells)
+    print("++++++++++++++++++++++++++++")
 
-    return render(request, 'frontend/home.html', {"categories": categories, "banerimages":banerimaes, "settingsdata":settingsdata})
+    return render(request, 'frontend/home.html', {"categories": categories, "banerimages":banerimaes, "settingsdata":settingsdata, "pproducts":pproducts, "best_sells":best_sells})
 
 
 def products(request):

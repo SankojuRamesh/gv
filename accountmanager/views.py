@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.contrib.auth import logout, authenticate, login
 from django.shortcuts import redirect
 from django.contrib.auth import get_user_model
+from adminmanager.models import SettingsModel
+from .models import ShippmentModel
+from ordermanager.models import  OrderModel
 User = get_user_model()
 
 def logoutview(request):
@@ -9,6 +12,7 @@ def logoutview(request):
     return redirect('/')
  
 def userloginview(request):
+    settingsdata = SettingsModel.objects.all().first()
     if request.method == "POST":
         username = request.POST.get("username")
         pwd = request.POST.get("password")
@@ -18,15 +22,40 @@ def userloginview(request):
             if user.is_active:
                 login(request,user)
                 return redirect("/")
-    return render(request, 'frontend/login.html')
+    return render(request, 'frontend/login.html', {"settingsdata":settingsdata})
     
 
 
 def account(request):
-    return render(request, 'frontend/account.html')
+    settingsdata = SettingsModel.objects.all().first()
+    shipment= ShippmentModel.objects.filter(user= request.user) 
+    orders = OrderModel.objects.filter(orderby=request.user)
+   
+    if  request.method == "POST": 
+               
+        data =  {'Fullname': request.POST.get('Fullname'), 
+        'Mobilenumber':  request.POST.get('Mobilenumber'), 
+        'Pincode':  request.POST.get('Pincode'), 
+        'Flat_House_no_Building_Apartment':  request.POST.get('Flat_House_no_Building_Apartment'), 
+        'Area_Street_Sector_Village':   request.POST.get('Area_Street_Sector_Village'),
+        'Landmark':   request.POST.get('Landmark'),
+        'Town_City':  request.POST.get('Town_City'),
+        'user':request.user}
+        if not shipment:
+            data['status'] =  1
+        else:
+            data['status'] =  0
+        
+        
+         
+        ShippmentModel.objects.create(**data)
+        
+
+    return render(request, 'frontend/account.html', {"settingsdata":settingsdata, "shipment" : shipment, "orders":orders})
 
 
 def register(request):
+    settingsdata = SettingsModel.objects.all().first()
     if request.method == "POST":
         name = request.POST.get("name")
         username = request.POST.get("username")
@@ -36,4 +65,4 @@ def register(request):
                                  password=pwd)
         return redirect("/userlogin/")
         
-    return render(request, 'frontend/register.html')
+    return render(request, 'frontend/register.html', {"settingsdata":settingsdata})

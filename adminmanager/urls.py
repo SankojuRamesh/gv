@@ -21,7 +21,7 @@ urlpatterns = [
     path('banerupdate/',views.banerupdate),
     path('banerdelete/',views.banerdelete),
     path('general/',views.general),
-    
+     path('orders/',views.orders),
 
  path('newproduct/',views.newproduct),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

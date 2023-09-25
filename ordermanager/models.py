@@ -14,9 +14,10 @@ User = get_user_model()
 
 class OrderModel(models.Model):
     orderid     = models.CharField(max_length=200, null=True, blank=True)
+    orderquentity     = models.IntegerField(default=0)
     orderprice  =  models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     orderdate   = models.DateTimeField(auto_now_add=True)
-    # orderby     =  models.ForeignKey(User, on_delete=models.CASCADE)
+    orderby     =  models.ForeignKey(User, on_delete=models.CASCADE)
     paymentid =  models.CharField(max_length=200, null=True, blank=True)
     paymentmethod =  models.CharField(max_length=200, null=True, blank=True)
     shippingid =  models.CharField(max_length=200, null=True, blank=True)
@@ -40,12 +41,22 @@ class OrderModel(models.Model):
     )
 
     def __str__(self):
+         
         return f"{self.id}-{self.name}-{self.status}"
     
 
+    @property
+    def shippingDetails(self):
+        
+        data = self.orderproduct.all().filter(orderid=self)
+        if data:
+            return data.first().shipping_state
+            
+        return "PENDING"
+
 
 class OrderProductsModel(models.Model):
-    orderid = models.ForeignKey(OrderModel, on_delete=models.CASCADE)
+    orderid = models.ForeignKey(OrderModel, on_delete=models.CASCADE, related_name='orderproduct')
     productid = models.ForeignKey(ProductModel, on_delete=models.DO_NOTHING)
     productQuntity = models.IntegerField(null=True, blank=True)
     shipping_state =  models.CharField(max_length=50, choices=(
@@ -56,6 +67,7 @@ class OrderProductsModel(models.Model):
     )
 
 
+
 class CartModel(models.Model):
     productid = models.ForeignKey(ProductModel, on_delete=models.CASCADE)
     quantity =  models.IntegerField(null=True, blank=True)
@@ -64,9 +76,10 @@ class CartModel(models.Model):
 
     @property
     def subtotal(self):
-        print(float(self.quantity) * float(self.productid.price))
-        return float(self.quantity) * float(self.productid.price)
-
+        if self.quantity:             
+            return float(self.quantity) * float(self.productid.price)
+        return 0
+    
 class WishlistModel(models.Model):
     productid = models.ForeignKey(ProductModel, on_delete=models.CASCADE)
     user  =  models.ForeignKey(User, on_delete=models.CASCADE)

@@ -1,4 +1,5 @@
 from django.db import models
+from productmanager.models import ProductModel
 
 # Create your models here.
 
@@ -17,3 +18,5 @@ class  SettingsModel(models.Model):
     logo = models.ImageField(upload_to='sitelogo/')
     address = models.TextField( blank=True, null=True)
     status = models.BooleanField(default=True)
+
+

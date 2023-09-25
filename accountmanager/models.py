@@ -76,6 +76,17 @@ class User(auth_models.AbstractBaseUser, models.Model):
 
 
 
+class ShippmentModel(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    Fullname = models.CharField(max_length=200)
+    Mobilenumber = models.CharField(max_length=200)
+    Pincode = models.CharField(max_length=200)
+    Flat_House_no_Building_Apartment = models.CharField(max_length=200)
+    Area_Street_Sector_Village = models.CharField(max_length=200)
+    Landmark = models.CharField(max_length=200)
+    Town_City = models.CharField(max_length=200)
+    status = models.CharField(max_length=200, null=True, blank=True)
+
 
 
 

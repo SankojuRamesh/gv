@@ -47,6 +47,8 @@ def delWishlist(request):
 def Cart(request):
     settingsdata = SettingsModel.objects.all().first() 
     if request.GET.get("detail")  :
+        if not request.user.is_authenticated:
+            return redirect('/userlogin/')  
         cartlist = CartModel.objects.filter(user= request.user)
         total= 0
         if cartlist:
@@ -72,8 +74,10 @@ def AddtoCart(request):
         quantity=int(request.POST.get('quantity',1)) 
         total_price = float(product.price)*float(quantity)
         check_exist = CartModel.objects.filter(productid = request.POST.get('pid')).first()
+         
         if check_exist:
-            quntety = check_exist.quantity+quantity
+
+            quntety = int(check_exist.quantity)+quantity
             check_exist.quantity= quntety
             check_exist.total_price = float(product.price)*float(quntety)
             check_exist.save()
@@ -128,3 +132,14 @@ def checkout(request):
 
 
 
+def orderdetails(request):
+    orderid=request.GET.get("orderid")
+    settingsdata = SettingsModel.objects.all().first()
+    categories = CategoryModel.objects.all()
+    wishlist_count  = WishlistModel.objects.filter(user=request.user).count()
+    cartlist = CartModel.objects.filter(user= request.user)
+    total= 0
+    if cartlist:
+        for cartAmount in cartlist:
+                total = float(cartAmount.total_price)+float(total)
+    return render(request, 'frontend/orderdetails.html', {"categories": categories, "cartlist":cartlist,"total":total,  "wishlist_count":wishlist_count, "settingsdata":settingsdata})

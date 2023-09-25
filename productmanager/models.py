@@ -15,8 +15,8 @@ class ProductModel(models.Model):
     Image4 = models.ImageField(upload_to='products', null=True, blank=True)
     stock = models.PositiveIntegerField(default=0)
     is_published = models.BooleanField(default=False)
-
-     
+    sells_type =( ("BEST", "BEST"), ("DEALS", "DEALS"), ("ALL", "ALL")) 
+    sell_state =    models.CharField(max_length=9, choices=sells_type,  default="ALL")   
     def __str__(self):
         return self.title
 
