@@ -59,7 +59,7 @@ def callback(request):
              
             order.save()
             
-            return render(request, "frontend/sucess.html", context={"status": order.status})
+            return render(request, "frontend/sucess.html", context={"status": order})
         else:
             order.status = PaymentStatus.FAILURE
             # order.payment_method = data.get("method", "Unknown")

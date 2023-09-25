@@ -131,7 +131,6 @@ def checkout(request):
     return render(request, 'frontend/checkout.html', {"categories": categories, "cartlist":cartlist,"total":total,  "wishlist_count":wishlist_count, "settingsdata":settingsdata})
 
 
-
 def orderdetails(request):
     orderid=request.GET.get("orderid")
     settingsdata = SettingsModel.objects.all().first()

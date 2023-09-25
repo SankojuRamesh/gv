@@ -1,0 +1,32 @@
+<div class="table-responsive modal-lg">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>title</th>
+                 
+                <th>Quntity</th>
+              
+               
+            </tr>
+        </thead>
+        <tbody>
+            {%for product in products%}
+            <tr>
+                <td  ><img style="width: 100px;" src="/products/{{product.productid.coverImage}}"> </td>
+                <td>{{product.productid.title}}</td>
+                
+                <td>{{product.productQuntity}}</td>
+               
+            </tr>
+
+
+       
+           
+        {%endfor%}
+           
+          
+         
+           
+        </tbody>
+    </table> </div>

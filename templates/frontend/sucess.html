@@ -1,3 +1,17 @@
+ 
+<center>
+    <a href="/" class="brand-wrap">
+        <img src="/products/sitelogo/Gopal-Vegetable-Nursery-Logo_6Fnfruw.png" class="logo" width="200px" alt="Nest Dashboard">
+    </a>
+    <br>
+<h4>Order Confirmation</h4>
+<p>Your order has been successfully placed.</p>
 
-{% extends "frontend/base.html" %}
-Secess page
+<h4>Order Details</h4>
+<ul>
+    <li><strong>Order Number:</strong> {{status.payment_id}}</li>
+    <li><strong>Date:</strong> {{status.orderdate}}</li>
+    <li><strong>Total Amount:</strong>{{status.amount}}</li>
+</ul>
+</center>
+ 

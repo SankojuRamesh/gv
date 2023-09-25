@@ -3,9 +3,7 @@
 {% block content %} 
     <div class="content-header">
         <h2 class="content-title">{{title}}</h2>
-          <div>
-   
-    </div>
+ 
     </div>
     <div class="card mb-4">
         <header class="card-header">
@@ -46,20 +44,28 @@
                         <tbody>
                             {%for order in orders%}
                             <tr>
-                                <td>{{order.paymentid}}</td>
+                                <td  ><a href="javascript:void(0)" paymentid="{{order.paymentid}}"  id="vieworder__{{order.id}}" data-toggle="modal" data-target="#myModal">{{order.paymentid}}</a></td>
                                 <td>{{order.orderdate}}</td>
                                 
-                                <td>{{order.shippingDetails}}</td>
+                                <td>{{order.shippingDetails}}
+
+                                   
+                                </td>
                                 <td>{{order.amount}}</td>
                                 <td>
                                    
-                                <select>
-                                    <option>Pending</option>
-                                    <option>Shipped</option>
-                                    <option>Cansle</option>
-                                </select> 
+                               <p> <select class="form-select" style="width: 114px;" id="changeShipping__{{order.id}}" >
+                                <option value="">Select</option>
+                                     <option value="PENDING">Pending</option>
+                                    <option value="PENDING">Processing</option>
+                                    <option value="SHIPPED">Dispatched</option>
+                                    <option value="CANCELED">Cancel </option>
+                                </select>  </p>
                                 </td>
                             </tr>
+
+
+                       
                            
                         {%endfor%}
                            
@@ -67,20 +73,43 @@
                          
                            
                         </tbody>
-                    </table>
-                </div>
+                    </table> </div>
                 
-            </article>
+                
+            </article></div>
 
           
          
-        </div>
         <!-- card-body end// -->
     </div>
-   
+  
     {% endblock %}
-    {% block script %}
 
+
+    {% block script %}
+    <script>
+        $("[id^=vieworder__]").click(function(){
+            orderid = this.id.split("__")[1]
+            $("#orderid").html($(this).attr("paymentid"))
+            $.get("/admin/Orderproducts/?orderid="+orderid,function(responce){
+                $("#orderlist").html(responce)
+            })
+        
+        })
+
+        $("[id^=changeShipping__]").change(function(){
+            orderid = this.id.split("__")[1]
+            orderstate= $(this).val()
+            if(orderstate){
+                
+           
+            $.get('/admin/changeorderstate/?orderid='+orderid+"&orderstate="+orderstate,function(responce){
+                   window.location.reload()
+
+            }) }
+
+        })
+</script>
     {% endblock %}
 
 

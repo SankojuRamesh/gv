@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from django.contrib.auth.decorators import login_required
 from productmanager.models import ProductModel
-from ordermanager.models import OrderModel
+from ordermanager.models import OrderModel,OrderProductsModel
 from categorymanager.models import CategoryModel, SubCategoryModel
 from adminmanager.models import BanerModel, SettingsModel
 from django.shortcuts import redirect
@@ -171,4 +171,23 @@ def orders(request):
     return render(request, 'backend/orderslist.html', {"title": "Order list", "generalSettings":generalSettings,"settings":settings, "orders":ordersObject })
      
  
+ 
+def OrderProducts(request):
+    order_id = request.GET.get("orderid")
+    if order_id:
+        products = OrderProductsModel.objects.filter(orderid=order_id)
+        print(products) 
     
+    return render(request, 'backend/ordersproductlist.html', {"title": "Order list", "products":products})
+
+
+
+def ChangeOrderState(request):
+    order_id = request.GET.get("orderid")
+    order_state = request.GET.get("orderstate")
+    
+    if order_id:
+        ordersObject = OrderModel.objects.filter(id=order_id).first()
+        print(ordersObject.orderproduct.all().update(shipping_state=order_state)) 
+    
+    return HttpResponse('change')

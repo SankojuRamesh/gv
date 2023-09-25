@@ -50,6 +50,9 @@ class OrderModel(models.Model):
         
         data = self.orderproduct.all().filter(orderid=self)
         if data:
+            if data.first().shipping_state == 'SHIPPED':
+                return "Dispatched"
+
             return data.first().shipping_state
             
         return "PENDING"
@@ -60,9 +63,10 @@ class OrderProductsModel(models.Model):
     productid = models.ForeignKey(ProductModel, on_delete=models.DO_NOTHING)
     productQuntity = models.IntegerField(null=True, blank=True)
     shipping_state =  models.CharField(max_length=50, choices=(
-        ('SHIPPED', 'Shipped'),
+        ('SHIPPED', 'Dispatched'),
         ('DELIVERED', 'Delivered'),
-        ('RETURNED', 'Returned'),  ),
+        ('RETURNED', 'Returned'), 
+         ('CANCELED', 'Canceled'),  ),
         default='PENDING',
     )
 
