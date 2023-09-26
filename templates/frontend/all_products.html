@@ -90,8 +90,8 @@
                             </div>
                             <div class="product-card-bottom">
                                 <div class="product-price">
-                                    <span>{{product.price}}</span>
-                                    <span class="old-price">$32.8</span>
+                                    <span>₹ {{product.price}}</span>
+                                    <span class="old-price">₹ {{product.oldPrice}}</span>
                                 </div>
                                 <div class="add-cart">
                                     <a class="add" href="javascript:void(0)" id="cart_{{product.id}}"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
@@ -278,7 +278,7 @@
       
 </div>
 
-
+{% include "frontend/footer.html" %} 
 
 {%endblock%}
 

@@ -4,7 +4,7 @@
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
-                <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                <a href="/" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
                 <span></span> Shop
                 <span></span> Cart
             </div>
@@ -56,7 +56,7 @@
                                     </div>
                                 </td>
                                 <td class="price" data-title="Price">
-                                    <h4 class="text-body">{{cart_product.productid.price}}</h4>
+                                    <h4 class="text-body">₹ {{cart_product.productid.price}}   </span></h4>
                                 </td>
                                 <td class="text-center detail-info" data-title="Stock">
                                     <div class="detail-extralink mr-15">
@@ -68,7 +68,7 @@
                                     </div>
                                 </td>
                                 <td class="price" data-title="Price">
-                                    <h4 class="text-brand">{{cart_product.total_price}}  </h4>
+                                    <h4 class="text-brand">₹ {{cart_product.total_price}}  </h4>
                                 </td>
                                 <td class="action text-center" data-title="Remove"><a href="javascript:vodi(0)" class="text-body" id="delCart_{{cart_product.id}}"><i class="fi-rs-trash">
                                     
@@ -92,7 +92,7 @@
         </div>
     </div>
 
- 
+    {% include "frontend/footer.html" %} 
     {%endblock%}
     {% block script %}
 

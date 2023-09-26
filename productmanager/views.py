@@ -18,6 +18,15 @@ def home(request):
     return render(request, 'frontend/home.html', {"categories": categories, "banerimages":banerimaes, "settingsdata":settingsdata, "pproducts":pproducts, "best_sells":best_sells})
 
 
+def aboutus(request):
+    settingsdata = SettingsModel.objects.all().first()
+    categories = CategoryModel.objects.all()
+    banerimaes = BanerModel.objects.filter(status=1)
+    pproducts = ProductModel.objects.all()[:16]
+    best_sells = ProductModel.objects.filter(sell_state= 'BEST')
+    return render(request, 'frontend/aboutus.html', {"categories": categories, "banerimages":banerimaes, "settingsdata":settingsdata, "pproducts":pproducts, "best_sells":best_sells})
+
+
 def products(request):
     settingsdata = SettingsModel.objects.all().first()
     categories = CategoryModel.objects.all()

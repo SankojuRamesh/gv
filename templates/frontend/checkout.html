@@ -12,52 +12,58 @@
     </div>
     <div class="container mb-80 mt-50">
         <div class="row">
-            <div class="col-lg-8 mb-40">
-                <h1 class="heading-2 mb-10">Checkout</h1>
-                <div class="d-flex justify-content-between"  >
-                    {%for shipments in shipment%}
-                                        
-                                                   
-                                                
-                    <div class="col-lg-4"> <hr>
-                        <div class="card">
-                            <div class="form-check">
-                            <label class="form-check-label"> <b> Default Address</b ></label>
-                                {%if shipments.status == '1' %}
-                               <input type="radio" id="shipping__{{shipments.id}}" checked class="form-check-input" name="Default"  >
-                                {%else%}
-                                <input type="radio"     class="form-check-input" name="Default" >
-                                {%endif%}
-                               
-                           </div>
-                            <div class="card-header">
-                                Fullname Name : {{shipments.Fullname}} 
-                            </div>
-                            
-                            <div class="card-header">
-                                Phone: {{shipments.Mobilenumber}} 
-                            </div>
-                            <div class="card-body">
-                                <address>
-                                   Flat/Bulding : {{shipments.Flat_House_no_Building_Apartment}},
-                                </address>
-                                <p>Stread/Area : {{shipments.Area_Street_Sector_Village}}</p>
-                                 <p>Town/City : {{shipments.Town_City}}</p>
-                                <p>Pincode : {{shipments.Pincode}}</p>
-                                 
-                            </div>
-                        </div>
-                    </div>
-
-                    {%endfor%}
-                    
-                </div>
-            </div>
+          
         </div>
         <div class="row" data-select2-id="19">
-            <div class="col-lg-7" data-select2-id="18">
+            <div class="col-lg-6" data-select2-id="18">
                 <div class="card-body">
-                                          
+
+                    <!--------------------------------->
+                    <div class="col-lg-12 mb-40">
+                        <h1 class="heading-2 mb-10">Checkout</h1>
+                        <div class="d-flex justify-content-between"  >
+                            {%for shipments in shipment%}
+                                                
+                                                           
+                                                        
+                            <div class="col-lg-4"> <hr>
+                                <div class="card">
+                                    <div class="form-check">
+                                    <label class="form-check-label"> <b> Default Address</b ></label>
+                                        {%if shipments.status == '1' %}
+                                       <input type="radio" id="shipping__{{shipments.id}}" checked class="form-check-input" name="Default"  >
+                                        {%else%}
+                                        <input type="radio"     class="form-check-input" name="Default" >
+                                        {%endif%}
+                                       
+                                   </div>
+                                    <div class="card-header">
+                                        Fullname Name : {{shipments.Fullname}} 
+                                    </div>
+                                    
+                                    <div class="card-header">
+                                        Phone: {{shipments.Mobilenumber}} 
+                                    </div>
+                                    <div class="card-body">
+                                        <address>
+                                           Flat/Bulding : {{shipments.Flat_House_no_Building_Apartment}},
+                                        </address>
+                                        <p>Stread/Area : {{shipments.Area_Street_Sector_Village}}</p>
+                                         <p>Town/City : {{shipments.Town_City}}</p>
+                                        <p>Pincode : {{shipments.Pincode}}</p>
+                                         
+                                    </div>
+                                </div>
+                            </div>
+        
+                            {%endfor%}
+                            
+                        </div>
+                    </div>
+                    <!--------------------------------->
+                    <hr>
+                       <h4>New Address</h4>
+                       <br>                   
                     <form method="POST" action="account/" name="enq">
                         
                         {% csrf_token %}
@@ -172,7 +178,7 @@
         </div>
     </div>
 
-
+    {% include "frontend/footer.html" %} 
     {%endblock%}
     {% block script %}
 

@@ -47,6 +47,9 @@ def delWishlist(request):
  
 def Cart(request):
     settingsdata = SettingsModel.objects.all().first() 
+         
+    categories = CategoryModel.objects.all()
+    wishlist = WishlistModel.objects.filter(user= request.user)
     if request.GET.get("detail")  :
         if not request.user.is_authenticated:
             return redirect('/userlogin/')  
@@ -57,7 +60,7 @@ def Cart(request):
                 total = float(cartAmount.total_price)+float(total) 
         if not request.user.is_authenticated:
             return redirect('/userlogin/')  
-        return render(request,'frontend/cart_detail.html', {"cart": cartlist,"total": total ,"crtcount":cartlist.count(), "settingsdata":settingsdata})
+        return render(request,'frontend/cart_detail.html', {"categories": categories, "wishlist":wishlist,"cart": cartlist,"total": total ,"crtcount":cartlist.count(), "settingsdata":settingsdata})
 
     cartlist = CartModel.objects.filter(user= request.user)
     total= 0

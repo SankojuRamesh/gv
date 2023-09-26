@@ -33,6 +33,8 @@ urlpatterns = [
     path('admin/', include('adminmanager.urls')),
     
     path('',  pviews.home),
+
+     path('aboutus/',  pviews.aboutus),
     path('products/',  pviews.products),
     path('product/',  pviews.product_detail),
     path('wishlist/',  orderViews.WishList_list),

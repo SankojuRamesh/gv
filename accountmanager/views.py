@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 from adminmanager.models import SettingsModel
 from .models import ShippmentModel
 from ordermanager.models import  OrderModel
+from categorymanager.models import CategoryModel
 User = get_user_model()
 
 def logoutview(request):
@@ -29,6 +30,11 @@ def userloginview(request):
 def account(request):
     settingsdata = SettingsModel.objects.all().first()
     shipment= ShippmentModel.objects.filter(user= request.user) 
+    settingsdata = SettingsModel.objects.all().first()
+    categories = CategoryModel.objects.all()
+    
+     
+    
     orders = OrderModel.objects.filter(orderby=request.user)
    
     if  request.method == "POST":
@@ -51,7 +57,7 @@ def account(request):
         ShippmentModel.objects.create(**data)
         
 
-    return render(request, 'frontend/account.html', {"settingsdata":settingsdata, "shipment" : shipment, "orders":orders})
+    return render(request, 'frontend/account.html', {"categories": categories,   "settingsdata":settingsdata,"settingsdata":settingsdata, "shipment" : shipment, "orders":orders})
 
 def profileupdate(request):
     if  request.method == "POST":

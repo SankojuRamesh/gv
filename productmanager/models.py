@@ -21,7 +21,10 @@ class ProductModel(models.Model):
         return self.title
 
 
-   
+    @property
+    def oldPrice(self):
+        return (self.price*10)/100+self.price
+
 
     @property
     def ActiveState(self):
