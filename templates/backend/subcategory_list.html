@@ -107,7 +107,7 @@
             cat.click(function(){
                 let cattiele = $("#subcat-name").val()
                 let catid = $("#catetory").val()
-                alert(catid)
+              
                 data= {"title":cattiele,"category":catid,   "csrfmiddlewaretoken": csrftoken }
                 if(cattiele){
                     $.post('/admin/subcategory/', data,function(res){

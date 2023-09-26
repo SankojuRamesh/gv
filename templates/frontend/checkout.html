@@ -4,7 +4,7 @@
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
-                <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                <a href="/" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
                 <span></span> Shop
                 <span></span> Checkout
             </div>
@@ -14,121 +14,84 @@
         <div class="row">
             <div class="col-lg-8 mb-40">
                 <h1 class="heading-2 mb-10">Checkout</h1>
-                <div class="d-flex justify-content-between">
-                    <h6 class="text-body">There are <span class="text-brand">3</span> products in your cart</h6>
+                <div class="d-flex justify-content-between"  >
+                    {%for shipments in shipment%}
+                                        
+                                                   
+                                                
+                    <div class="col-lg-4"> <hr>
+                        <div class="card">
+                            <div class="form-check">
+                            <label class="form-check-label"> <b> Default Address</b ></label>
+                                {%if shipments.status == '1' %}
+                               <input type="radio" id="shipping__{{shipments.id}}" checked class="form-check-input" name="Default"  >
+                                {%else%}
+                                <input type="radio"     class="form-check-input" name="Default" >
+                                {%endif%}
+                               
+                           </div>
+                            <div class="card-header">
+                                Fullname Name : {{shipments.Fullname}} 
+                            </div>
+                            
+                            <div class="card-header">
+                                Phone: {{shipments.Mobilenumber}} 
+                            </div>
+                            <div class="card-body">
+                                <address>
+                                   Flat/Bulding : {{shipments.Flat_House_no_Building_Apartment}},
+                                </address>
+                                <p>Stread/Area : {{shipments.Area_Street_Sector_Village}}</p>
+                                 <p>Town/City : {{shipments.Town_City}}</p>
+                                <p>Pincode : {{shipments.Pincode}}</p>
+                                 
+                            </div>
+                        </div>
+                    </div>
+
+                    {%endfor%}
+                    
                 </div>
             </div>
         </div>
         <div class="row" data-select2-id="19">
             <div class="col-lg-7" data-select2-id="18">
-                <div class="row mb-50">
-                    <div class="col-lg-6 mb-sm-15 mb-lg-0 mb-md-3">
-                        <div class="toggle_info">
-                            <span><i class="fi-rs-user mr-10"></i><span class="text-muted font-lg">Already have an account?</span> 
-                            <a href="#loginform" data-bs-toggle="collapse" class="collapsed font-lg" aria-expanded="false">Click here to login</a></span>
-                        </div>
-                        <div class="panel-collapse collapse login_form" id="loginform">
-                            <div class="panel-body">
-                                <p class="mb-30 font-sm">If you have shopped with us before, please enter your details below. If you are a new customer, please proceed to the Billing &amp; Shipping section.</p>
-                                <form method="post">
-                                    <div class="form-group">
-                                        <input type="text" name="email" placeholder="Username Or Email">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" name="password" placeholder="Password">
-                                    </div>
-                                    <div class="login_footer form-group">
-                                        <div class="chek-form">
-                                            <div class="custome-checkbox">
-                                                <input class="form-check-input" type="checkbox" name="checkbox" id="remember" value="">
-                                                <label class="form-check-label" for="remember"><span>Remember me</span></label>
-                                            </div>
-                                        </div>
-                                        <a href="#">Forgot password?</a>
-                                    </div>
-                                    <div class="form-group">
-                                        <button class="btn btn-md" name="login">Log in</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                   
-                </div>
-                <div class="row" data-select2-id="17">
-                    <h4 class="mb-30">Billing Details</h4>
-                    <form method="post" data-select2-id="16">
-                        <div class="row">
-                            <div class="form-group col-lg-6">
-                                <input type="text" required="" name="fname" placeholder="First name *">
-                            </div>
-                            <div class="form-group col-lg-6">
-                                <input type="text" required="" name="lname" placeholder="Last name *">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-lg-6">
-                                <input type="text" name="billing_address" required="" placeholder="Address *">
-                            </div>
-                            <div class="form-group col-lg-6">
-                                <input type="text" name="billing_address2" required="" placeholder="Address line2">
-                            </div>
-                        </div>
-                   
-                        <div class="row">
-                            <div class="form-group col-lg-6">
-                                <input required="" type="text" name="zipcode" placeholder="Postcode / ZIP *">
-                            </div>
-                            <div class="form-group col-lg-6">
-                                <input required="" type="text" name="phone" placeholder="Phone *">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-lg-6">
-                                <input required="" type="text" name="cname" placeholder="Company Name">
-                            </div>
-                            <div class="form-group col-lg-6">
-                                <input required="" type="text" name="email" placeholder="Email address *">
-                            </div>
-                        </div>
-                        <div class="form-group mb-30">
-                            <textarea rows="5" placeholder="Additional information"></textarea>
-                        </div>
+                <div class="card-body">
+                                          
+                    <form method="POST" action="account/" name="enq">
                         
-                      
-                        <div class="ship_detail">
-                           
-                            <div id="collapseAddress" class="different_address collapse in">
-                                <div class="row">
-                                    <div class="form-group col-lg-6">
-                                        <input type="text" required="" name="fname" placeholder="First name *">
-                                    </div>
-                                    <div class="form-group col-lg-6">
-                                        <input type="text" required="" name="lname" placeholder="Last name *">
-                                    </div>
-                                </div>
-                              
-                                <div class="row">
-                                    <div class="form-group col-lg-6">
-                                        <input type="text" name="billing_address" required="" placeholder="Address *">
-                                    </div>
-                                    <div class="form-group col-lg-6">
-                                        <input type="text" name="billing_address2" required="" placeholder="Address line2">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-lg-6">
-                                        <input required="" type="text" name="state" placeholder="State / County *">
-                                    </div>
-                                    <div class="form-group col-lg-6">
-                                        <input required="" type="text" name="city" placeholder="City / Town *">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-lg-6">
-                                        <input required="" type="text" name="zipcode" placeholder="Postcode / ZIP *">
-                                    </div>
-                                </div>
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Fullname Name <span class="required">*</span></label>
+                                <input required="" class="form-control" name="Fullname" value=" " type="text">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Mobile Number <span class="required">*</span></label>
+                                <input required="" class="form-control" name="Mobilenumber" value=" ">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Pincode <span class="required">*</span></label>
+                                <input required="" class="form-control" name="Pincode" type="text" value=" ">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Flat/House no/Building/Apartment <span class="required">*</span></label>
+                                <input required="" class="form-control" name="Flat_House_no_Building_Apartment" type="text" value=" ">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Area/Street/Sector/Village <span class="required">*</span></label>
+                                <input required="" class="form-control" name="Area_Street_Sector_Village" type="text" value=" ">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Landmark <span class="required">*</span></label>
+                                <input required="" class="form-control" name="Landmark" type="text" value=" ">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Town/City<span class="required">*</span></label>
+                                <input required="" class="form-control" name="Town_City" type="text" value=" ">
+                            </div>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-fill-out submit font-weight-bold" name="submit" value="Submit">Save</button>
                             </div>
                         </div>
                     </form>
@@ -143,6 +106,7 @@
                     <div class="divider-2 mb-30"></div>
                     <div class="table-responsive order_table checkout">
                         <form action="{% url 'payment' %}" method='POST'>
+                            
                             {% csrf_token %}
                         <table class="table no-border">
                             <tbody>
@@ -167,12 +131,14 @@
                                     </td>
                                 </tr>
                                  {%endfor%}
-                                 <input type="name" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="Ramesh">
+                                 <input type="hidden"    name="name"  value="{{request.user.name}}">
+                                 <input type="hidden" value=""  name="shipping" id="shippingid">
                                  <input type="hidden" name="amount" class="form-control" id="exampleInputPassword1" value="{{total}}">
                                  <tr><td colspan="3"><h4><center>Total</center></h4></td><td><center> <a href="Javacript:void(0)" class="text-heading"><h4>{{total}}</h4></a></center></td></tr>
                             </tbody>
                         </table>
-                        <button type="submit" class="btn btn-primary">Pay Now</button>
+                        <p ><h4 id="errormassage" style="display: none;">You can't pay without  shipping Address!</h4></p>
+                        <button type="submit" id="paynow" class="btn btn-primary">Pay Now</button>
  </form>
 
  
@@ -209,5 +175,27 @@
 
     {%endblock%}
     {% block script %}
+
+
+    <script>
+    $(document).ready(function(){
+
+
+    if( $('[id^=shipping__]').length  )         // use this if you are using id to check
+    {
+        $('[id^=shipping__]').each(function(){
+             if($(this).is(':checked')){
+                $("#shippingid").val(this.id.split("__")[1])
+             }
+            
+        })
+     
+    }else{
+        $("#paynow").prop('disabled', true);
+        $("#errormassage").show()
+    }
+    })
+
+    </script>
      {%endblock%}
  

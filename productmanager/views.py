@@ -15,9 +15,6 @@ def home(request):
     banerimaes = BanerModel.objects.filter(status=1)
     pproducts = ProductModel.objects.all()[:16]
     best_sells = ProductModel.objects.filter(sell_state= 'BEST')
-    print(best_sells)
-    print("++++++++++++++++++++++++++++")
-
     return render(request, 'frontend/home.html', {"categories": categories, "banerimages":banerimaes, "settingsdata":settingsdata, "pproducts":pproducts, "best_sells":best_sells})
 
 
@@ -42,10 +39,12 @@ def product_detail(request):
 
     pid = request.GET.get('id')
     product = {}
+    
     if pid:
         product = ProductModel.objects.get(id=pid) 
+        Relatedproducts = ProductModel.objects.filter(subcategory=product.subcategory).order_by('-id')[0:15]
 
-    return render(request, 'frontend/productDetails.html', {"categories": categories,"product":product, "wishlist_count":wishlist_count, "settingsdata":settingsdata})
+    return render(request, 'frontend/productDetails.html', {"categories": categories,"product":product, "wishlist_count":wishlist_count, "settingsdata":settingsdata,"Relatedproducts":Relatedproducts})
 
 
 

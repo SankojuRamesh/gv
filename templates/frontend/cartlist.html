@@ -6,7 +6,7 @@
             <a href="/products/?sub={{cart_product.productid.subcategory.id}}"><img alt="Nest" src="/products/{{cart_product.productid.coverImage}}"></a>
         </div>
         <div class="shopping-cart-title">
-            <h4><a href="/products/?sub={{cart_product.productid.subcategory.id}}">{{cart_product.productid.title}}</a></h4>
+            <h4><a href="/products/?sub={{cart_product.productid.subcategory.id}}" class="text-overflow">{{cart_product.productid.title}}</a></h4>
             <h4><span>{{cart_product.quantity}} × </span>{{cart_product.productid.price}}  = &nbsp; {{cart_product.subtotal}} </h4>
         </div>
         <div class="shopping-cart-delete">
@@ -29,4 +29,19 @@
     </div>
    
 </div> {% endif %}
-<script>$("#cartcount").text("{{crtcount}}")</script>
+<script>$("#cartcount").text("{{crtcount}}")
+
+$(function(){
+  $(".text-overflow").each(function(i){
+     
+    len=$(this).text().length;
+    
+    if(len>15)
+    {
+      $(this).text($(this).text().substr(0,15)+'...');
+    }
+  });
+});
+// ]]>
+
+</script>

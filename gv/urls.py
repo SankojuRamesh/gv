@@ -28,6 +28,7 @@ urlpatterns = [
      path('logout/', accountViews.logoutview),
       path('userlogin/', accountViews.userloginview),
     path('account/', accountViews.account), 
+     path('profileupdate/', accountViews.profileupdate), 
     path('register/', accountViews.register),
     path('admin/', include('adminmanager.urls')),
     

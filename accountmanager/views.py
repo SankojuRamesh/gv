@@ -31,7 +31,7 @@ def account(request):
     shipment= ShippmentModel.objects.filter(user= request.user) 
     orders = OrderModel.objects.filter(orderby=request.user)
    
-    if  request.method == "POST": 
+    if  request.method == "POST":
                
         data =  {'Fullname': request.POST.get('Fullname'), 
         'Mobilenumber':  request.POST.get('Mobilenumber'), 
@@ -53,6 +53,16 @@ def account(request):
 
     return render(request, 'frontend/account.html', {"settingsdata":settingsdata, "shipment" : shipment, "orders":orders})
 
+def profileupdate(request):
+    if  request.method == "POST":
+        print(request.POST)
+        user = User.objects.filter(id=request.user.id).first()
+        user.name= request.POST.get('name')
+        user.phone= request.POST.get('phone')
+        user.email= request.POST.get('email')
+        user.save()
+
+    return redirect('/account/')
 
 def register(request):
     settingsdata = SettingsModel.objects.all().first()

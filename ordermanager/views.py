@@ -3,6 +3,7 @@ from django.shortcuts import render, HttpResponse
 from categorymanager.models import CategoryModel, SubCategoryModel
 from .models import WishlistModel, ProductModel, CartModel
 from adminmanager.models import SettingsModel
+from accountmanager.models import ShippmentModel
 
 from django.shortcuts import render, redirect
 from django.conf import settings
@@ -124,11 +125,12 @@ def checkout(request):
     categories = CategoryModel.objects.all()
     wishlist_count  = WishlistModel.objects.filter(user=request.user).count()
     cartlist = CartModel.objects.filter(user= request.user)
+    shipment= ShippmentModel.objects.filter(user= request.user) 
     total= 0
     if cartlist:
         for cartAmount in cartlist:
                 total = float(cartAmount.total_price)+float(total)
-    return render(request, 'frontend/checkout.html', {"categories": categories, "cartlist":cartlist,"total":total,  "wishlist_count":wishlist_count, "settingsdata":settingsdata})
+    return render(request, 'frontend/checkout.html', {"categories": categories, "cartlist":cartlist,"total":total,  "wishlist_count":wishlist_count, "settingsdata":settingsdata,"shipment":shipment})
 
 
 def orderdetails(request):
