@@ -25,7 +25,12 @@
    
     <div class="shopping-cart-button">
         <a href="/cart/?detail=true" class="outline">View cart</a>
+        {% if total > 200 %}
         <a href="/checkout/">Checkout</a>
+        {% else%}
+        <a href="/#/">Cart Value Must be abow  ₹  200</a>
+         {% endif %}
+       
     </div>
    
 </div> {% endif %}
