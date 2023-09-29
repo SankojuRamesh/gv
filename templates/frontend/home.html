@@ -96,7 +96,7 @@
                                                  <span  class="old-price">₹ {{product.oldPrice}}  </span>
                                             </div>
                                             <div class="add-cart">
-                                                <a class="add" href="javacript:void(0)" id="cart_{{product.id}}"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                                <a class="add" href="javascript:void(0)" id="cart_{{product.id}}"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                             </div>
                                         </div>
                                     </div>
@@ -221,6 +221,13 @@ $(document).ready(function(){
             quantity = 1
             $.post("/addtocart/", {"pid":pid, "quantity": quantity , "csrfmiddlewaretoken":csrfToken},function(responce){
                 CartList()
+                $.toast({
+                heading: 'Success',
+                text: 'Successfully added to Cart',
+                position: 'top-right',
+                stack: false,
+                icon: 'success'
+                }) 
             })
         })
     }
@@ -230,7 +237,14 @@ $(document).ready(function(){
         pid = this.id.split("_")[1]
         var csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
          $.post("/wishlist/", {'pid': pid, "csrfmiddlewaretoken":csrfToken}, function(responce){ 
-                $("#wishlist").text(responce)    
+                $("#wishlist").text(responce)   
+                $.toast({
+                heading: 'Success',
+                text: 'Successfully added to Wishlist',
+                position: 'top-right',
+                stack: false,
+                icon: 'success'
+                })  
         })
      })
 })

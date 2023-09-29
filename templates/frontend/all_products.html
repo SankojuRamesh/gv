@@ -300,6 +300,13 @@
 
             $.post("/addtocart/", {"pid":pid, "quantity": quantity , "csrfmiddlewaretoken":csrfToken},function(responce){
                 CartList()
+                $.toast({
+                heading: 'Success',
+                text: 'Successfully added to Cart',
+                position: 'top-right',
+                stack: false,
+                icon: 'success'
+                }) 
             })
         })
     }
@@ -310,7 +317,15 @@
         pid = this.id.split("_")[1]
         var csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
          $.post("/wishlist/", {'pid': pid, "csrfmiddlewaretoken":csrfToken}, function(responce){ 
-                $("#wishlist").text(responce)    
+                $("#wishlist").text(responce)
+                
+ $.toast({
+    heading: 'Success',
+    text: 'Successfully added to wishlist',
+    position: 'top-right',
+    stack: false,
+    icon: 'success'
+}) 
         })
      })
 
