@@ -22,7 +22,7 @@
                     <div class="col-lg-12 mb-40">
                         <h1 class="heading-2 mb-10">Checkout</h1>
                         <div class="d-flex justify-content-between"  >
-                            {%for shipments in shipment%}
+                            {%for  address in shipping_address%}
                                                 
                                                            
                                                         
@@ -30,27 +30,27 @@
                                 <div class="card">
                                     <div class="form-check">
                                     <label class="form-check-label"> <b> Default Address</b ></label>
-                                        {%if shipments.status == '1' %}
-                                       <input type="radio" id="shipping__{{shipments.id}}" checked class="form-check-input" name="Default"  >
+                                        {%if address.status == '1' %}
+                                       <input type="radio" id="shipping__{{address.id}}" checked class="form-check-input" name="Default"  >
                                         {%else%}
                                         <input type="radio"     class="form-check-input" name="Default" >
                                         {%endif%}
                                        
                                    </div>
                                     <div class="card-header">
-                                        Fullname Name : {{shipments.Fullname}} 
+                                        Fullname Name : {{address.Fullname}} 
                                     </div>
                                     
                                     <div class="card-header">
-                                        Phone: {{shipments.Mobilenumber}} 
+                                        Phone: {{address.Mobilenumber}} 
                                     </div>
                                     <div class="card-body">
                                         <address>
-                                           Flat/Bulding : {{shipments.Flat_House_no_Building_Apartment}},
+                                           Flat/Bulding : {{address.Flat_House_no_Building_Apartment}},
                                         </address>
-                                        <p>Stread/Area : {{shipments.Area_Street_Sector_Village}}</p>
-                                         <p>Town/City : {{shipments.Town_City}}</p>
-                                        <p>Pincode : {{shipments.Pincode}}</p>
+                                        <p>Stread/Area : {{address.Area_Street_Sector_Village}}</p>
+                                         <p>Town/City : {{address.Town_City}}</p>
+                                        <p>Pincode : {{address.Pincode}}</p>
                                          
                                     </div>
                                 </div>
@@ -64,7 +64,7 @@
                     <hr>
                        <h4>New Address</h4>
                        <br>                   
-                    <form method="POST" action="account/" name="enq">
+                    <form method="POST" action="/account/" name="enq">
                         
                         {% csrf_token %}
                         <div class="row">

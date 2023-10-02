@@ -128,12 +128,12 @@ def checkout(request):
     categories = CategoryModel.objects.all()
     wishlist_count  = WishlistModel.objects.filter(user=request.user).count()
     cartlist = CartModel.objects.filter(user= request.user)
-    shipment= ShippmentModel.objects.filter(user= request.user) 
+    shipping_address= ShippmentModel.objects.filter(user= request.user) 
     total= 0
     if cartlist:
         for cartAmount in cartlist:
                 total = float(cartAmount.total_price)+float(total)
-    return render(request, 'frontend/checkout.html', {"categories": categories, "cartlist":cartlist,"total":total,  "wishlist_count":wishlist_count, "settingsdata":settingsdata,"shipment":shipment})
+    return render(request, 'frontend/checkout.html', {"categories": categories, "cartlist":cartlist,"total":total,  "wishlist_count":wishlist_count, "settingsdata":settingsdata,"shipping_address":shipping_address})
 
 
 def orderdetails(request):

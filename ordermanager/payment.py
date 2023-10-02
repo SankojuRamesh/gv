@@ -10,15 +10,18 @@ import json
 
 def order_payment(request):
     if request.method == "POST":
-        name =''  # request.POST.get("name")
+        name = request.POST.get("name")
         amount = request.POST.get("amount")
+        adress = request.POST.get("shipping")
         orderquentity = request.POST.get("orderquentity")
         client = razorpay.Client(auth=(settings.RAZORPAY_API_KEY, settings.RAZORPAY_API_SECRET))
 
 
 
-        
-        shipping = ShippmentModel.objects.filter(user=request.user).filter(status=1).first()
+        if adress:
+            shipping = ShippmentModel.objects.get(id=adress) 
+        else:
+            shipping = ShippmentModel.objects.filter(user=request.user).filter(status=1).first()
         razorpay_order = client.order.create(
             {"amount": int(float(amount)) * 100, "currency": "INR", "payment_capture": "1"}
         )

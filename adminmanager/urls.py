@@ -25,5 +25,8 @@ urlpatterns = [
     path('Orderproducts/',views.OrderProducts),
     path('newproduct/',views.newproduct),
     path('changeorderstate/',views.ChangeOrderState),
+    path('allproductsforbestsales/',views.allproductsforbestsales),
+
+    
  
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

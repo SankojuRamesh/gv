@@ -91,6 +91,7 @@ def settings(request):
 
 def homesettings(request):
     settings = SettingsModel.objects.all().first()
+
     return render(request, 'backend/homesettings.html', {"title": "Home Settings","settings":settings})
     
 
@@ -188,6 +189,15 @@ def ChangeOrderState(request):
     
     if order_id:
         ordersObject = OrderModel.objects.filter(id=order_id).first()
-        print(ordersObject.orderproduct.all().update(shipping_state=order_state)) 
+        ordersObject.orderproduct.all().update(shipping_state=order_state)
     
     return HttpResponse('change')
+
+
+def allproductsforbestsales(request):
+    products = OrderProductsModel.objects.all().order_by('-id')
+    bestsels = products.filter('')
+    return render(request, 'backend/allproductsforbestsales.html', {  "products":products})
+
+     
+

@@ -13,7 +13,7 @@
                           
                             <a class="nav-link active" id="settings_baner" aria-current="page" href="javascript:void(0)">Baner Images</a>
                             <a class="nav-link "  id="settings_general" href="javascript:void(0)">General</a>
-                            <a class="nav-link"  id="settings_baner" href="#">Best Sells</a>
+                            <a class="nav-link"  id="settings_bestsels" href="#">Best Sells</a>
                             <a class="nav-link" href="#">SMS Setings</a>
                             
                             
@@ -144,6 +144,15 @@ $("[id^=settings_]").click(function(){
             })
                
     }) 
+  }
+
+  if(urlfor=="bestsels"){
+    $.get('/admin/allproductsforbestsales/', function(responce){       
+
+
+    })
+
+    $("#relatedPage").html('') 
   }
 })
 }) 

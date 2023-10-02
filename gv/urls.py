@@ -37,6 +37,7 @@ urlpatterns = [
      path('aboutus/',  pviews.aboutus),
     path('products/',  pviews.products),
     path('product/',  pviews.product_detail),
+    
     path('wishlist/',  orderViews.WishList_list),
     path('Wishlistcount/',  orderViews.WishlistCount),
     path('delWishlist/',  orderViews.delWishlist),

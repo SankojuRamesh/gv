@@ -129,10 +129,12 @@
                                         <div class="col-lg-6"> <hr>
                                             <div class="card">
                                                 <div class="form-check">
-                                                <label class="form-check-label"> <b> Default Address</b ></label>
+                                              
                                                     {%if shipments.status == '1' %}
+                                                    <label class="form-check-label"> <b> This is Default Address</b ></label>
                                                    <input type="radio"  checked class="form-check-input" name="Default"  >
                                                     {%else%}
+                                                    <label class="form-check-label"> <b>  Make it as Default Address</b ></label>
                                                     <input type="radio"     class="form-check-input" name="Default" >
                                                     {%endif%}
                                                    

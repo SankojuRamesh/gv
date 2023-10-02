@@ -30,7 +30,7 @@ def userloginview(request):
 def account(request):
     settingsdata = SettingsModel.objects.all().first()
     shipment= ShippmentModel.objects.filter(user= request.user) 
-    settingsdata = SettingsModel.objects.all().first()
+     
     categories = CategoryModel.objects.all()
     
      
