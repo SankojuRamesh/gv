@@ -36,7 +36,25 @@
         <!-- card end// -->
     </section>
     <!-- content-main end// -->
- 
+   <!-- Modal -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h4 class="modal-title" id="myModalLabel">Add To Best Seller</h4>
+      </div>
+
+      <div class="modal-body">
+         
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
  
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -69,6 +87,13 @@
             </div>
           </div>
         </div>
+
+     
+
+
+
+
+        
       </div>
 {% endblock %}
 {% block script %}
@@ -148,11 +173,11 @@ $("[id^=settings_]").click(function(){
 
   if(urlfor=="bestsels"){
     $.get('/admin/allproductsforbestsales/', function(responce){       
-
+          $("#relatedPage").html(responce) 
 
     })
 
-    $("#relatedPage").html('') 
+   
   }
 })
 }) 

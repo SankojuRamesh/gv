@@ -196,8 +196,8 @@ def ChangeOrderState(request):
 
 def allproductsforbestsales(request):
     products = OrderProductsModel.objects.all().order_by('-id')
-    bestsels = products.filter('')
-    return render(request, 'backend/allproductsforbestsales.html', {  "products":products})
+    best_sells = ProductModel.objects.filter(sell_state= 'BEST')
+    return render(request, 'backend/allproductsforbestsales.html', {  "products":products, "best_sells":best_sells})
 
      
 

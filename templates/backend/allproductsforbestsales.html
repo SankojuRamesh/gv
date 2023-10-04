@@ -1,0 +1,40 @@
+
+<div class="card-body">
+    <article class="itemlist">
+        <div class="table-responsive">
+            <a href="javascript:void(0)" class="btn btn-primary btn-sm rounded" data-toggle="modal" data-target="#myModal2" >Create new</a>
+       
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><Img></Img></th>
+                        <th>Name</th> 
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for best_products  in best_sells %}
+                    <tr>
+                        <td><img src="/products/{{best_products.coverImage}}" style="width: 100px;"></td>
+                        <td>{{best_products.title }}</td>
+                       
+                        
+                        <td> <div class="form-check ms-2">
+                            
+                          <a href="javascript:void(0)" id="bestproducts_{{best_products.id}}" class="btn btn-sm font-sm btn-light rounded"> 
+                            <i class="material-icons md-delete_forever"></i> Delete </a></div> </td>
+                    </tr>
+                 {%endfor%}
+                     
+                </tbody>
+            </table>
+           
+        </div>
+        <!-- row .// -->
+    </article>
+
+</div>
+
+
+
