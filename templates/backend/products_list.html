@@ -38,38 +38,40 @@
         </header>
         <!-- card-header end// -->
         <div class="card-body">
-            {%for product in products%}
-            <article class="itemlist">
-                <div class="row align-items-center">
-                    <div class="col col-check flex-grow-0">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox">
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-4 col-8 flex-grow-1 col-name">
-                        <a class="itemside" href="#">
-                            <div class="left">
-                                <img src="/products/{{product.coverImage}}" class="img-sm img-thumbnail" alt="Item">
-                            </div>
-                            <div class="info">
-                                <h6 class="mb-0">{{product.title}}</h6>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-2 col-sm-2 col-4 col-price"><span>{{product.price}}</span></div>
-                    <div class="col-lg-2 col-sm-2 col-4 col-status">
-                        <span class="badge rounded-pill alert-success">{{product.ActiveState}} </span>
-                    </div>
-                     
-                    <div class="col-lg-2 col-sm-2 col-4 col-action text-end">
-                        <a href="#" class="btn btn-sm font-sm rounded btn-brand"> <i class="material-icons md-edit"></i> Edit </a>
-                        <a href="#" class="btn btn-sm font-sm btn-light rounded"> <i class="material-icons md-delete_forever"></i> Delete </a>
-                    </div>
-                </div>
-                <!-- row .// -->
-            </article>
+            
+            
 
-            {%endfor%} 
+            <table class="table    table-bordered" id="product_list">
+                <thead>
+                    <tr>
+                        <th><Img></Img></th>
+                        <th>Name</th> 
+                        <th>Price</th>
+                        <th>Stock</th>  
+                        <th>BestSell Status</th>  
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for product in products%} 
+                    <tr>
+                        <td><img src="/products/{{product.coverImage}}" style="width: 100px;"></td>
+                        <td>{{product.title }}</td>
+                       <td>{{product.price }}</td> 
+                       <td>{{product.stock }}</td>
+                       <td>{{product.stock }}</td>
+                        
+                        <td> <div class="form-check ms-2">
+                            
+                          <a href="javascript:void(0)" id="bestproducts_{{product.id}}" class="btn btn-sm font-sm btn-light rounded"> 
+                            <i class="material-icons md-delete_forever"></i> Delete </a></div> </td>
+                    </tr>
+                 {%endfor%}
+                     
+                </tbody>
+            </table>
+
+            
          
         </div>
         <!-- card-body end// -->
@@ -77,7 +79,19 @@
    
     {% endblock %}
     {% block script %}
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+     
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
+    <script>
+
+    $(document).ready(function(){
+
+       
+        new DataTable('#product_list');
+        
+        })
+</script>
     {% endblock %}
 
 

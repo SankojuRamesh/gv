@@ -53,11 +53,13 @@ def products(request):
     settings = SettingsModel.objects.all().first()
     if request.method == "POST":
         
+        
         data = {
                  "title":request.POST.get('title'), 
                 'subcategory':SubCategoryModel.objects.get(id=  request.POST.get('subcategory')), 
                 'description':request.POST.get('description'), 
                 'price':request.POST.get('price'), 
+                "stock":request.POST.get('stock'), 
                 'coverImage': request.FILES['coverImage'],
                 'Image1': request.FILES['image1'],
                 'Image2': request.FILES['image2'],
@@ -195,6 +197,7 @@ def ChangeOrderState(request):
 
 
 def allproductsforbestsales(request):
+
     products = OrderProductsModel.objects.all().order_by('-id')
     best_sells = ProductModel.objects.filter(sell_state= 'BEST')
     return render(request, 'backend/allproductsforbestsales.html', {  "products":products, "best_sells":best_sells})
